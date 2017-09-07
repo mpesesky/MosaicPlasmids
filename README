@@ -9,13 +9,13 @@ Steps used to analyze mosaic plasmid properties (Figures 1B, 2, and 3)
 
 4) Found identical regions between plasmids using the BLAST command `blastn -query ncbi_plasmid.fna -db ncbi_plasmid -perc_identity 100 -outfmt 6 -num_threads 8 -out perfect_plasmid_matches.txt`
 
-5) Filtered out self-matches and matches of <500 nucleotides with custom script `blast_filtering.py -n -l 500 perfect_plasmid_matches.txt > filtered_matches.txt`
+	a) Filtered out self-matches and matches of <500 nucleotides with custom script `blast_filtering.py -n -l 500 perfect_plasmid_matches.txt > filtered_matches.txt`
 
-6) Found near identical plasmid sequences using the BLAST command `blastn -query ncbi_plasmid.fna -db ncbi_plasmid -perc_identity 95.63 -outfmt 6 -num_threads 8 -out perc_95.63.txt`
+5) Found near identical plasmid sequences using the BLAST command `blastn -query ncbi_plasmid.fna -db ncbi_plasmid -perc_identity 95.63 -outfmt 6 -num_threads 8 -out perc_95.63.txt`
 
-7) Filtered out matches not covering the full plasmid length using custom script `blast_filtering.py -s ncbi_plasmid.fna -c 100 perc_95.63.txt > perc_95.63.fullLength.txt`.
+	a) Filtered out matches not covering the full plasmid length using custom script `blast_filtering.py -s ncbi_plasmid.fna -c 100 perc_95.63.txt > perc_95.63.fullLength.txt`.
 
-8) Identified mosaic plasmids with custom script `split_mosaic.py -f perc_95.63.fullLength.txt -c plasmid_character.txt ncbi_plasmid.fna filtered_matches.txt 
+8) Tabulated mosaic plasmids with custom script `split_mosaic.py -f perc_95.63.fullLength.txt -c plasmid_character.txt ncbi_plasmid.fna filtered_matches.txt 
 
 
 ----Identify plasmid characteristics----
@@ -23,4 +23,22 @@ Steps used to analyze mosaic plasmid properties (Figures 1B, 2, and 3)
 
 2) Gathered environment information using custom script `retrieve_environments.py ncbi_plasmid.gbff -o plasmid_environemnts.txt`. NOTE: Due to low numbers of records with usable environment information, this information was not used for any analysis in the final manuscript.
 
-3) 
+3) Downloaded the IS26 nucleotide sequence from ISFinder (https://www-is.biotoul.fr/scripts/ficheIS.php?name=IS26)
+
+	a) Identified plasmids containing exact nucleotide matches to the cononical IS26 seqeunce with the BLAST command `blastn -query is26.fna -db ncbi_plasmid -perc_identity 100 -outfmt 6 -num_threads 8 -out IS26_results.txt`.
+	b) Filtered out matches not covering the full IS26 transposase sequence with custom script `blast_filtering.py -n -l 704 IS26_results.txt > IS26_results_complete.txt`.
+	c) Tabulated plasmids containing the IS26 transposase with the custom script `split_IS26.py -c IS26_table.txt ncbi_plasmid.fna IS26_results_complete.txt`.
+
+4) Tabulated Plasmid lengths with the custom script `build_len_table.py`.
+
+5) The source organism for each plasmid was extracted from the plasmid catalog using Excel. NOTE: An example organism table (organisms.txt) used in this study is provided.
+
+----Combine tables and analyze----
+1) Where the tables generated above did not already have headers, these were added by hand. In all cases the header for the column of plasmid accession numbers is 'locus'
+
+2) Combined tabulated plasmid information with `build_MasterTable`
+
+3) Built table of mosaic plasmids per genus with custom script `mosaic_taxonomy.py -c 10 -o MosaicGenus10.tsv MasterTable.txt`.
+
+	a) Improper source bacteria names, such as 'Onion', 'Plasmid', or 'uncultured' were removed manually at this time.
+	b) Total plasmid counts and fraction mosaic plasmids were caclulated for each genus using Excel. A new table 
