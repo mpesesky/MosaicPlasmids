@@ -1,0 +1,26 @@
+Steps used to analyze mosaic plasmid properties (Figures 1B, 2, and 3)
+
+----Identify Mosaic Plasmids---- 
+1) Download release catalog from ftp://ftp.ncbi.nlm.nih.gov/refseq/release/plasmid
+
+2) Concatenate nucleotide fasta files (plasmid.1.1.genomic.fna, plasmid.2.1.genomic.fna, etc)  into single fasta (ncbi_plasmid.fna)
+
+3) Created a BLAST database from ncbi_plasmid.fna, using BLAST command line tools version 2.2.31+ (BLAST) and the command `makeblastdb -in ncbi_plasmid.fna -dbtype nucl -out ncbi_plasmid`.
+
+4) Found identical regions between plasmids using the BLAST command `blastn -query ncbi_plasmid.fna -db ncbi_plasmid -perc_identity 100 -outfmt 6 -num_threads 8 -out perfect_plasmid_matches.txt`
+
+5) Filtered out self-matches and matches of <500 nucleotides with custom script `blast_filtering.py -n -l 500 perfect_plasmid_matches.txt > filtered_matches.txt`
+
+6) Found near identical plasmid sequences using the BLAST command `blastn -query ncbi_plasmid.fna -db ncbi_plasmid -perc_identity 95.63 -outfmt 6 -num_threads 8 -out perc_95.63.txt`
+
+7) Filtered out matches not covering the full plasmid length using custom script `blast_filtering.py -s ncbi_plasmid.fna -c 100 perc_95.63.txt > perc_95.63.fullLength.txt`.
+
+8) Identified mosaic plasmids with custom script `split_mosaic.py -f perc_95.63.fullLength.txt -c plasmid_character.txt ncbi_plasmid.fna filtered_matches.txt 
+
+
+----Identify plasmid characteristics----
+1) Concatenate Genbank flat files (plasmid.1.1.genomic.gbff, plasmid.2.1.genomic.gbff, etc)  into single GenBank flat file (ncbi_plasmid.gbff)
+
+2) Gathered environment information using custom script `retrieve_environments.py ncbi_plasmid.gbff -o plasmid_environemnts.txt`. NOTE: Due to low numbers of records with usable environment information, this information was not used for any analysis in the final manuscript.
+
+3) 
