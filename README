@@ -57,3 +57,6 @@ Steps used to analyze mosaic plasmid properties (Figures 2, 3, and S1, and Table
 
 4) Created the gene proportion distribution figure (Figure 3) with the command `python geneDistribution.py -b 20 -g character -l "desired x-axis label" -o proportion_histogram.png -L -c 10 $1_proportion_table.tsv Gene_proportion` where $1 is the same as above.
 
+----Length distribution----
+1) Make Length distribution histogram (Figure S1) using command `python lengthDistribution.py`
+
