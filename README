@@ -1,4 +1,4 @@
-Steps used to analyze mosaic plasmid properties (Figures 1B, 2, and 3)
+Steps used to analyze mosaic plasmid properties (Figures 2, 3, and S1, and Table S1 )
 
 ----Identify Mosaic Plasmids---- 
 1) Download release catalog from ftp://ftp.ncbi.nlm.nih.gov/refseq/release/plasmid
@@ -46,4 +46,4 @@ Steps used to analyze mosaic plasmid properties (Figures 1B, 2, and 3)
 	d) A column was added to this table for proportion intergenus mosaic plasmids, calculated for each genus below.
 	e) The resulting table is Table S1.
 
-4)
+4) Calculated proportion intergenus plasmids using the script `organism_counts.py`, which requires the 'organisms.txt' and 'links.txt' files from the circos directory.
