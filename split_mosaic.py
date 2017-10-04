@@ -58,6 +58,7 @@ for line in blastFile:
         subject = fields[1]
     except IndexError:
         print(line)
+        continue
 #    print(query)
 #    exit()
 
@@ -82,6 +83,7 @@ if args.matches is not None:
     outNon.close()
 else:
     output = open(args.combo, 'w')
+    output.write("locus\tcharacter\n")
     for item in matches:
         output.write("{}\t{}\n".format(item.split(".")[0], "mosaic"))
     for item in nonMatches:
