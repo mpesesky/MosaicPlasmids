@@ -86,7 +86,7 @@ NC_008488	Escherichia coli
 NC_008489	Escherichia coli
 NC_004981	Lactococcus lactis
 NC_008597	Escherichia coli
-NC_004988	Borreliella burgdorferi
+NC_004988	Borrelia burgdorferi
 NC_005243	Staphylococcus aureus
 NC_005564	Staphylococcus aureus
 NC_002757	Streptococcus mutans
@@ -215,7 +215,7 @@ NC_002610	Klebsiella pneumoniae
 NC_004846	Haemophilus influenzae biotype aegyptius
 NC_004968	Streptococcus thermophilus
 NC_006881	Escherichia coli
-NC_008443	Borreliella burgdorferi
+NC_008443	Borrelia burgdorferi
 NC_008612	Photobacterium damselae subsp. piscicida
 NC_011641	Klebsiella pneumoniae
 NC_011796	Bacillus thuringiensis serovar kurstaki str. YBT-1520
@@ -344,7 +344,7 @@ NC_011266	Escherichia coli
 NC_011382	Klebsiella pneumoniae
 NC_011522	Staphylococcus aureus
 NC_010098	Lactobacillus plantarum
-NC_004971	Borreliella burgdorferi
+NC_004971	Borrelia burgdorferi
 NC_004163	Lactococcus lactis subsp. lactis bv. diacetylactis
 NC_005247	Erwinia amylovora
 NC_006979	Streptococcus pyogenes
@@ -668,7 +668,7 @@ NC_019220	Burkholderia pseudomallei
 NC_019221	Rahnella aquatilis CIP 78.65 = ATCC 33071
 NC_019222	Rahnella aquatilis
 NC_019223	Rahnella sp. WMR66
-NC_019225	Borreliella burgdorferi
+NC_019225	Borrelia burgdorferi
 NC_019228	Bacillus thuringiensis
 NC_019229	Rickettsia felis
 NC_019230	Bacillus sp. 24
@@ -2067,8 +2067,8 @@ NC_017401	Borrelia burgdorferi N40
 NC_017424	Borrelia burgdorferi N40
 NC_017417	Borrelia burgdorferi N40
 NC_017402	Borrelia burgdorferi N40
-NC_006128	Borreliella bavariensis PBi
-NC_006129	Borreliella bavariensis PBi
+NC_006128	Borrelia bavariensis PBi
+NC_006129	Borrelia bavariensis PBi
 NC_015213	Lactobacillus acidophilus 30SC
 NC_015218	Lactobacillus acidophilus 30SC
 NC_009507	Sphingomonas wittichii RW1
@@ -2594,22 +2594,22 @@ NC_017282	Campylobacter jejuni subsp. jejuni S3
 NC_017476	Lactobacillus casei BD-II
 NC_017438	Chlamydia trachomatis A2497
 NC_017475	Lactobacillus casei LC2W
-NC_015907	Borreliella bissettii DN127
-NC_015903	Borreliella bissettii DN127
-NC_015908	Borreliella bissettii DN127
-NC_015904	Borreliella bissettii DN127
-NC_015909	Borreliella bissettii DN127
-NC_015905	Borreliella bissettii DN127
-NC_015910	Borreliella bissettii DN127
-NC_015906	Borreliella bissettii DN127
-NC_015911	Borreliella bissettii DN127
-NC_015915	Borreliella bissettii DN127
-NC_015922	Borreliella bissettii DN127
-NC_015916	Borreliella bissettii DN127
-NC_015917	Borreliella bissettii DN127
-NC_015918	Borreliella bissettii DN127
-NC_015919	Borreliella bissettii DN127
-NC_015920	Borreliella bissettii DN127
+NC_015907	Borrelia bissettii DN127
+NC_015903	Borrelia bissettii DN127
+NC_015908	Borrelia bissettii DN127
+NC_015904	Borrelia bissettii DN127
+NC_015909	Borrelia bissettii DN127
+NC_015905	Borrelia bissettii DN127
+NC_015910	Borrelia bissettii DN127
+NC_015906	Borrelia bissettii DN127
+NC_015911	Borrelia bissettii DN127
+NC_015915	Borrelia bissettii DN127
+NC_015922	Borrelia bissettii DN127
+NC_015916	Borrelia bissettii DN127
+NC_015917	Borrelia bissettii DN127
+NC_015918	Borrelia bissettii DN127
+NC_015919	Borrelia bissettii DN127
+NC_015920	Borrelia bissettii DN127
 NC_014824	Ruminococcus albus 7 = DSM 20455
 NC_014825	Ruminococcus albus 7 = DSM 20455
 NC_014826	Ruminococcus albus 7 = DSM 20455
@@ -2749,29 +2749,29 @@ NC_018699	Leuconostoc carnosum JB16
 NC_018635	Chlamydia psittaci M56
 NC_018638	Chlamydia psittaci VS225
 NC_018640	Chlamydia psittaci WS/RT/E30
-NC_012176	Borreliella spielmanii A14S
-NC_012181	Borreliella spielmanii A14S
-NC_012190	Borreliella spielmanii A14S
-NC_012132	Borreliella spielmanii A14S
-NC_012200	Borreliella spielmanii A14S
-NC_012164	Borreliella spielmanii A14S
-NC_012173	Borreliella spielmanii A14S
-NC_012183	Borreliella spielmanii A14S
+NC_012176	Borrelia spielmanii A14S
+NC_012181	Borrelia spielmanii A14S
+NC_012190	Borrelia spielmanii A14S
+NC_012132	Borrelia spielmanii A14S
+NC_012200	Borrelia spielmanii A14S
+NC_012164	Borrelia spielmanii A14S
+NC_012173	Borrelia spielmanii A14S
+NC_012183	Borrelia spielmanii A14S
 NC_018639	Chlamydia psittaci WC
 NC_018657	Clostridium acidurici 9a
 NC_018634	Chlamydia psittaci CP3
 NC_018680	Alteromonas macleodii str. 'Balearic Sea AD45'
-NC_012129	Borreliella valaisiana VS116
-NC_012177	Borreliella valaisiana VS116
-NC_012131	Borreliella valaisiana VS116
-NC_012133	Borreliella valaisiana VS116
-NC_012204	Borreliella valaisiana VS116
-NC_012166	Borreliella valaisiana VS116
-NC_012130	Borreliella valaisiana VS116
-NC_012180	Borreliella valaisiana VS116
-NC_012185	Borreliella valaisiana VS116
-NC_012128	Borreliella valaisiana VS116
-NC_012169	Borreliella valaisiana VS116
+NC_012129	Borrelia valaisiana VS116
+NC_012177	Borrelia valaisiana VS116
+NC_012131	Borrelia valaisiana VS116
+NC_012133	Borrelia valaisiana VS116
+NC_012204	Borrelia valaisiana VS116
+NC_012166	Borrelia valaisiana VS116
+NC_012130	Borrelia valaisiana VS116
+NC_012180	Borrelia valaisiana VS116
+NC_012185	Borrelia valaisiana VS116
+NC_012128	Borrelia valaisiana VS116
+NC_012169	Borrelia valaisiana VS116
 NC_019387	Thermus oshimai JL-2
 NC_019388	Thermus oshimai JL-2
 NC_018636	Chlamydia psittaci MN
@@ -2967,8 +2967,8 @@ NZ_CP008945	Corynebacterium atypicum
 NZ_CP007807	Brevibacillus laterosporus LMG 15441
 NZ_CP007808	Brevibacillus laterosporus LMG 15441
 NZ_CP009055	Lactococcus lactis subsp. lactis NCDO 2118
-NZ_CP009118	Borreliella valaisiana Tom4006
-NZ_CP009119	Borreliella valaisiana Tom4006
+NZ_CP009118	Borrelia valaisiana Tom4006
+NZ_CP009119	Borrelia valaisiana Tom4006
 NZ_CP009213	Borrelia afzelii Tom3107
 NZ_CP009214	Borrelia afzelii Tom3107
 NZ_CP007723	Corynebacterium glutamicum
@@ -3372,25 +3372,25 @@ NZ_CP007647	Lactobacillus salivarius
 NZ_CP007648	Lactobacillus salivarius
 NZ_CP007649	Lactobacillus salivarius
 NZ_CP007650	Lactobacillus salivarius
-NZ_CP009657	Borreliella burgdorferi
-NZ_CP009658	Borreliella burgdorferi
-NZ_CP009659	Borreliella burgdorferi
-NZ_CP009660	Borreliella burgdorferi
-NZ_CP009661	Borreliella burgdorferi
-NZ_CP009662	Borreliella burgdorferi
-NZ_CP009663	Borreliella burgdorferi
-NZ_CP009664	Borreliella burgdorferi
-NZ_CP009665	Borreliella burgdorferi
-NZ_CP009666	Borreliella burgdorferi
-NZ_CP009667	Borreliella burgdorferi
-NZ_CP009668	Borreliella burgdorferi
-NZ_CP009669	Borreliella burgdorferi
-NZ_CP009670	Borreliella burgdorferi
-NZ_CP009671	Borreliella burgdorferi
-NZ_CP009672	Borreliella burgdorferi
-NZ_CP009673	Borreliella burgdorferi
-NZ_CP009674	Borreliella burgdorferi
-NZ_CP009675	Borreliella burgdorferi
+NZ_CP009657	Borrelia burgdorferi
+NZ_CP009658	Borrelia burgdorferi
+NZ_CP009659	Borrelia burgdorferi
+NZ_CP009660	Borrelia burgdorferi
+NZ_CP009661	Borrelia burgdorferi
+NZ_CP009662	Borrelia burgdorferi
+NZ_CP009663	Borrelia burgdorferi
+NZ_CP009664	Borrelia burgdorferi
+NZ_CP009665	Borrelia burgdorferi
+NZ_CP009666	Borrelia burgdorferi
+NZ_CP009667	Borrelia burgdorferi
+NZ_CP009668	Borrelia burgdorferi
+NZ_CP009669	Borrelia burgdorferi
+NZ_CP009670	Borrelia burgdorferi
+NZ_CP009671	Borrelia burgdorferi
+NZ_CP009672	Borrelia burgdorferi
+NZ_CP009673	Borrelia burgdorferi
+NZ_CP009674	Borrelia burgdorferi
+NZ_CP009675	Borrelia burgdorferi
 NC_020525	Acinetobacter baumannii D1279779
 NZ_CP009289	Paenibacillus durus
 NZ_CP007713	Acinetobacter baumannii LAC-4
@@ -3702,15 +3702,15 @@ NC_019847	Sinorhizobium meliloti GR4
 NC_019848	Sinorhizobium meliloti GR4
 NC_019849	Sinorhizobium meliloti GR4
 NZ_CP012399	Chelatococcus sp. CO-6
-NC_012247	Borreliella finlandensis
-NC_012252	Borreliella finlandensis
-NC_012239	Borreliella finlandensis
-NC_012242	Borreliella finlandensis
-NC_012260	Borreliella finlandensis
-NC_012265	Borreliella finlandensis
-NC_012267	Borreliella finlandensis
-NC_012230	Borreliella finlandensis
-NC_012234	Borreliella finlandensis
+NC_012247	Borrelia finlandensis
+NC_012252	Borrelia finlandensis
+NC_012239	Borrelia finlandensis
+NC_012242	Borrelia finlandensis
+NC_012260	Borrelia finlandensis
+NC_012265	Borrelia finlandensis
+NC_012267	Borrelia finlandensis
+NC_012230	Borrelia finlandensis
+NC_012234	Borrelia finlandensis
 NC_012105	Borrelia burgdorferi 64b
 NC_012174	Borrelia burgdorferi 64b
 NC_012179	Borrelia burgdorferi 64b
@@ -7470,37 +7470,37 @@ NC_007766	Rhizobium etli CFN 42
 NC_004041	Rhizobium etli CFN 42
 NZ_CP011362	Salimicrobium jeotgali
 NZ_CP011363	Salimicrobium jeotgali
-NZ_CP018263	Borreliella afzelii
-NZ_CP018264	Borreliella afzelii
-NZ_CP018265	Borreliella afzelii
-NZ_CP018266	Borreliella afzelii
-NZ_CP018267	Borreliella afzelii
-NZ_CP018268	Borreliella afzelii
-NZ_CP018269	Borreliella afzelii
-NZ_CP018270	Borreliella afzelii
-NZ_CP018271	Borreliella afzelii
-NZ_CP018272	Borreliella afzelii
-NZ_CP018273	Borreliella afzelii
-NZ_CP018274	Borreliella afzelii
-NZ_CP018275	Borreliella afzelii
-NZ_CP018276	Borreliella afzelii
-NZ_CP018277	Borreliella afzelii
-NZ_CP018278	Borreliella afzelii
-NZ_CP018279	Borreliella afzelii
-NZ_CP018280	Borreliella afzelii
-NZ_CP018281	Borreliella afzelii
-NZ_CP018282	Borreliella afzelii
-NZ_CP018283	Borreliella afzelii
-NZ_CP018284	Borreliella afzelii
-NZ_CP018285	Borreliella afzelii
-NZ_CP018286	Borreliella afzelii
-NZ_CP018287	Borreliella afzelii
-NZ_CP018288	Borreliella afzelii
-NZ_CP018289	Borreliella afzelii
-NZ_CP018290	Borreliella afzelii
-NZ_CP018291	Borreliella afzelii
-NZ_CP018292	Borreliella afzelii
-NZ_CP018293	Borreliella afzelii
+NZ_CP018263	Borrelia afzelii
+NZ_CP018264	Borrelia afzelii
+NZ_CP018265	Borrelia afzelii
+NZ_CP018266	Borrelia afzelii
+NZ_CP018267	Borrelia afzelii
+NZ_CP018268	Borrelia afzelii
+NZ_CP018269	Borrelia afzelii
+NZ_CP018270	Borrelia afzelii
+NZ_CP018271	Borrelia afzelii
+NZ_CP018272	Borrelia afzelii
+NZ_CP018273	Borrelia afzelii
+NZ_CP018274	Borrelia afzelii
+NZ_CP018275	Borrelia afzelii
+NZ_CP018276	Borrelia afzelii
+NZ_CP018277	Borrelia afzelii
+NZ_CP018278	Borrelia afzelii
+NZ_CP018279	Borrelia afzelii
+NZ_CP018280	Borrelia afzelii
+NZ_CP018281	Borrelia afzelii
+NZ_CP018282	Borrelia afzelii
+NZ_CP018283	Borrelia afzelii
+NZ_CP018284	Borrelia afzelii
+NZ_CP018285	Borrelia afzelii
+NZ_CP018286	Borrelia afzelii
+NZ_CP018287	Borrelia afzelii
+NZ_CP018288	Borrelia afzelii
+NZ_CP018289	Borrelia afzelii
+NZ_CP018290	Borrelia afzelii
+NZ_CP018291	Borrelia afzelii
+NZ_CP018292	Borrelia afzelii
+NZ_CP018293	Borrelia afzelii
 NZ_CP012356	Cutibacterium acnes
 NZ_CP015623	Corynebacterium crudilactis
 NZ_CP015624	Corynebacterium crudilactis
@@ -7572,17 +7572,17 @@ NZ_CP018848	Xanthomonas citri pv. citri
 NZ_CP018849	Xanthomonas citri pv. citri
 NZ_CP018815	Enterobacter cloacae
 NZ_CP018813	Paraburkholderia sp. SOS3
-NZ_CP018745	Borreliella garinii
-NZ_CP018746	Borreliella garinii
-NZ_CP018747	Borreliella garinii
-NZ_CP018748	Borreliella garinii
-NZ_CP018749	Borreliella garinii
-NZ_CP018750	Borreliella garinii
-NZ_CP018751	Borreliella garinii
-NZ_CP018752	Borreliella garinii
-NZ_CP018753	Borreliella garinii
-NZ_CP018754	Borreliella garinii
-NZ_CP018755	Borreliella garinii
+NZ_CP018745	Borrelia garinii
+NZ_CP018746	Borrelia garinii
+NZ_CP018747	Borrelia garinii
+NZ_CP018748	Borrelia garinii
+NZ_CP018749	Borrelia garinii
+NZ_CP018750	Borrelia garinii
+NZ_CP018751	Borrelia garinii
+NZ_CP018752	Borrelia garinii
+NZ_CP018753	Borrelia garinii
+NZ_CP018754	Borrelia garinii
+NZ_CP018755	Borrelia garinii
 NG_051846	Klebsiella pneumoniae
 NG_051873	uncultured bacterium
 NG_051879	Pseudomonas aeruginosa

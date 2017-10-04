@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-FILTER_LENGTH = 5000
+FILTER_LENGTH = 500
 
 import csv
 
@@ -70,4 +70,4 @@ print(df.size)
 
 print("writing to 'links.txt'")
 links = df[["qseqid", "qstart", "qend", "sseqid", "sstart", "send", "color"]].copy()
-links.to_csv("links.txt5k", sep='\t', quoting=csv.QUOTE_NONE, header=False, index=False)
+links.to_csv("links.txt", sep='\t', quoting=csv.QUOTE_NONE, header=False, index=False)
