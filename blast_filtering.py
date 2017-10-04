@@ -43,6 +43,7 @@ def abundance(valueTable, numbins):
     pd.set_option('display.max_rows', len(x))
     print(x)
     pd.reset_option('display.max_rows')
+    return x
 
 def queryLengths(seqFile):
     seqDict = fol.one_line_d(seqFile)
@@ -54,12 +55,20 @@ def queryLengths(seqFile):
 
 def percFilter(valueTable, lenDict, perc):
     valueTable['qlen'] = valueTable['qseqid'].map(lenDict)
-    retTable = valueTable[(valueTable['length'].map(float) / valueTable['qlen'].map(float)) >= (perc / 100)]
-    return retTable
+    valueTable['slen'] = valueTable['sseqid'].map(lenDict)
+    retTable = valueTable[((valueTable['length'].map(float) / valueTable['qlen'].map(float)) >= (perc / 100))|((valueTable['length'].map(float) / valueTable['slen'].map(float)) >= (perc / 100))]
+    return retTable[colNames]
 
 def percidFilter(valueTable, percid):
     newdf = valueTable[valueTable['pident'].map(float) > percid]
     return newdf
+
+def otherBLASTFilter(mainTable, filterTable):
+    keys = ['qseqid', 'sseqid']
+    i1 = mainTable.set_index(keys).index
+    i2 = filterTable.set_index(keys).index
+    return mainTable[~i1.isin(i2)]
+
 
 if __name__ == "__main__":
     import argparse
@@ -75,6 +84,7 @@ if __name__ == "__main__":
     parser.add_argument("-c", "--percent", type=float, help="Filter out matches below percent length")
     parser.add_argument("-s", "--seq", type=str, default=None, help="Query seq file, to determine query lengths")
     parser.add_argument("-e", "--percid", type=float, default=None, help="Filter out matches lower than percid")
+    parser.add_argument("-o", "--other", type=str, default=None, help="Filter out query subject pairs present in second BLAST file")
 
     args = parser.parse_args()
 
@@ -105,5 +115,9 @@ if __name__ == "__main__":
         else:
             lengths = queryLengths(args.seq)
             results = percFilter(results, lengths, args.percent)
+
+    if args.other is not None:
+        otherBlast = pd.read_table(args.other, sep="\t", header=None, names=colNames)
+        results = otherBLASTFilter(results, otherBlast)
 
     print_full(results)
