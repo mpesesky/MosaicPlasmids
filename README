@@ -38,7 +38,12 @@ Steps used to analyze mosaic plasmid properties (Figures 1B, 2, and 3)
 
 2) Combined tabulated plasmid information with `build_MasterTable`
 
-3) Built table of mosaic plasmids per genus with custom script `mosaic_taxonomy.py -c 10 -o MosaicGenus10.tsv MasterTable.txt`.
+3) Built table and figure of mosaic plasmids per genus with custom script `mosaic_taxonomy.py -c 10 -o MosaicGenus10.tsv MasterTable.txt`.
 
-	a) Improper source bacteria names, such as 'Onion', 'Plasmid', or 'uncultured' were removed manually at this time.
-	b) Total plasmid counts and fraction mosaic plasmids were caclulated for each genus using Excel. A new table 
+	a) Improper source bacteria names, such as 'Onion', 'Plasmid', or 'uncultured' were removed manually.
+	b) The Borreliella genus was merged with Borrelia at this time, to reflect that it contains the same organisms and the Borreliella classification does not yet have standing.
+	c) [Enterobacter] and [Haemophilus] were merged with Enterobacter and Haemophilus.
+	d) A column was added to this table for proportion intergenus mosaic plasmids, calculated for each genus below.
+	e) The resulting table is Table S1.
+
+4)
