@@ -26,10 +26,10 @@ Steps used to analyze mosaic plasmid properties (Figures 2, 3, and S1, and Table
 3) Downloaded the IS26 nucleotide sequence from ISFinder (https://www-is.biotoul.fr/scripts/ficheIS.php?name=IS26)
 
 	a) Identified plasmids containing exact nucleotide matches to the cononical IS26 seqeunce with the BLAST command `blastn -query is26.fna -db ncbi_plasmid -perc_identity 100 -outfmt 6 -num_threads 8 -out IS26_results.txt`.
-	b) Filtered out matches not covering the full IS26 transposase sequence with custom script `blast_filtering.py -n -l 704 IS26_results.txt > IS26_results_complete.txt`.
-	c) Tabulated plasmids containing the IS26 transposase with the custom script `split_IS26.py -c IS26_table.txt ncbi_plasmid.fna IS26_results_complete.txt`.
+	b) Filtered out matches not covering the full IS26 transposase sequence with custom script `python blast_filtering.py -n -l 704 IS26_results.txt > IS26_results_complete.txt`.
+	c) Tabulated plasmids containing the IS26 transposase with the custom script `python split_IS26.py -c IS26_table.txt ncbi_plasmid.fna IS26_results_complete.txt`.
 
-4) Tabulated Plasmid lengths with the custom script `build_len_table.py`.
+4) Tabulated Plasmid lengths with the custom script `python build_len_table.py`.
 
 5) The source organism for each plasmid was extracted from the plasmid catalog using Excel. NOTE: An example organism table (organisms.txt) used in this study is provided.
 

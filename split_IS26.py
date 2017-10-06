@@ -27,7 +27,10 @@ for line in blastFile:
         continue
     fields = line.split("\t")
     query = fields[0]
-    subject = fields[1]
+    try:
+        subject = fields[1]
+    except IndexError:
+        continue
 #    print(query)
 #    exit()
 
