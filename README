@@ -9,13 +9,13 @@ Steps used to analyze mosaic plasmid properties (Figures 2, 3, and S1, and Table
 
 4) Found identical regions between plasmids using the BLAST command `blastn -query ncbi_plasmid.fna -db ncbi_plasmid -perc_identity 100 -outfmt 6 -num_threads 8 -out perfect_plasmid_matches.txt`
 
-	a) Filtered out self-matches and matches of <500 nucleotides with custom script `blast_filtering.py -n -l 500 perfect_plasmid_matches.txt > filtered_matches.txt`
+	a) Filtered out self-matches and matches of <500 nucleotides with custom script `python blast_filtering.py -n -l 500 perfect_plasmid_matches.txt > filtered_matches.txt`
 
-5) Found near identical plasmid sequences using the BLAST command `blastn -query ncbi_plasmid.fna -db ncbi_plasmid -perc_identity 95.63 -outfmt 6 -num_threads 8 -out perc_95.63.txt`
+5) Found near identical plasmid sequences using the BLAST command `blastn -query ncbi_plasmid.fna -db ncbi_plasmid -perc_identity 95.32 -outfmt 6 -num_threads 8 -out perc_95.32.txt`
 
-	a) Filtered out matches not covering the full plasmid length using custom script `blast_filtering.py -s ncbi_plasmid.fna -c 100 perc_95.63.txt > perc_95.63.fullLength.txt`.
+	a) Filtered out matches not covering the full plasmid length using custom script `python blast_filtering.py -s ncbi_plasmid.fna -c 100 perc_95.32.txt > perc_95.32.fullLength.txt`.
 
-8) Tabulated mosaic plasmids with custom script `split_mosaic.py -f perc_95.63.fullLength.txt -c plasmid_character.txt ncbi_plasmid.fna filtered_matches.txt 
+8) Tabulated mosaic plasmids with custom script `python split_mosaic.py -f perc_95.32.fullLength.txt -c plasmid_character.txt ncbi_plasmid.fna filtered_matches.txt` 
 
 
 ----Identify plasmid characteristics----
