@@ -21,7 +21,7 @@ Steps used to analyze mosaic plasmid properties (Figures 2, 3, and S1, and Table
 ----Identify plasmid characteristics----
 1) Concatenate Genbank flat files (plasmid.1.1.genomic.gbff, plasmid.2.1.genomic.gbff, etc)  into single GenBank flat file (ncbi_plasmid.gbff)
 
-2) Gathered environment information using custom script `retrieve_environments.py ncbi_plasmid.gbff -o plasmid_environemnts.txt`. NOTE: Due to low numbers of records with usable environment information, this information was not used for any analysis in the final manuscript.
+2) Gathered environment information using custom script `python retrieve_environments.py ncbi_plasmid.gbff -o plasmid_environments.txt`. NOTE: Due to low numbers of records with usable environment information, this information was not used for any analysis in the final manuscript.
 
 3) Downloaded the IS26 nucleotide sequence from ISFinder (https://www-is.biotoul.fr/scripts/ficheIS.php?name=IS26)
 
@@ -36,9 +36,9 @@ Steps used to analyze mosaic plasmid properties (Figures 2, 3, and S1, and Table
 ----Combine tables and analyze----
 1) Where the tables generated above did not already have headers, these were added by hand. In all cases the header for the column of plasmid accession numbers is 'locus'
 
-2) Combined tabulated plasmid information with `build_MasterTable`
+2) Combined tabulated plasmid information with `bash build_MasterTable`
 
-3) Built table and figure of mosaic plasmids per genus with custom script `mosaic_taxonomy.py -c 10 -o MosaicGenus10.tsv MasterTable.txt` (Figure 2).
+3) Built table and figure of mosaic plasmids per genus with custom script `python mosaic_taxonomy.py -c 10 -o MosaicGenus10.tsv MasterTable.txt` (Figure 2).
 
 	a) Improper source bacteria names, such as 'Onion', 'Plasmid', or 'uncultured' were removed manually.
 	b) The Borreliella genus was merged with Borrelia at this time, to reflect that it contains the same organisms and the Borreliella classification does not yet have standing.
@@ -46,7 +46,7 @@ Steps used to analyze mosaic plasmid properties (Figures 2, 3, and S1, and Table
 	d) A column was added to this table for proportion intergenus mosaic plasmids, calculated for each genus below.
 	e) The resulting table is Table S1.
 
-4) Calculated proportion intergenus plasmids using the script `organism_counts.py`, which requires the 'organisms.txt' and 'links.txt' files from the circos directory.
+4) Calculated proportion intergenus plasmids using the script `python organism_counts.py`, which requires the 'organisms.txt' and 'links.txt' files from the circos directory.
 
 ----Transposase and Resistance gene information----
 1) Ran a HMMER search of the appropriate database (Resfams or custom transposase database) usign the command `hmmscan -o $1.txt --tblout $1_table.txt --max --cpu 16 $1.hmm ncbi_plasmid.faa`, where $1 is the base name of the database. For Resfams the flag `--cut_ga` was also used.

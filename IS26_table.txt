@@ -1,3 +1,4 @@
+locus	IS26
 NZ_CP019017.1	Present
 NZ_CP019014.1	Present
 NZ_CP018994.1	Present

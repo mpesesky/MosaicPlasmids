@@ -1,7 +1,7 @@
 import pandas as pd
 
 links = pd.read_table("links.txt", sep="\t", header=None, names=['qlocus', 'qstart', 'qend', 'slocus', 'sstart', 'send', 'link'], index_col=False)
-organisms = pd.read_table("organisms.txt", sep="\t", header=None, index_col=0).to_dict()[1]
+organisms = pd.read_table("../../circos/organisms.txt", sep="\t", header=None, index_col=0).to_dict()[1]
 orgLoci = organisms.keys()
 for locus in orgLoci:
     genus = organisms[locus].split(" ")[0]
