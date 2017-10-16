@@ -34,7 +34,7 @@ def import_fasta(fastaFile):
     for header in longList:
         parts = header.rstrip("\n").lstrip(">").split(" ")
         descDict[parts[0]] = " ".join(parts[1:])
-    return lenDict, descDict
+    return lenDict, descDict, seqDict
 
 
 def add_lengths(hmmDF, lengths):
@@ -78,7 +78,8 @@ def import_tsv(tableFile):
 def gb_add(hmmDF, gbFile):
     plasmids = SeqIO.parse(gbFile, 'genbank')
     proteins = hmmDF['query name'].tolist()
-    hmmDF['plasmid ID'] = ""
+    hmmDF['plasmid ID'] = "i"
+    outDF = pd.DataFrame(data=None, columns=hmmDF.columns)
 
     for plasmid in plasmids:
         plasid = plasmid.name
@@ -88,23 +89,22 @@ def gb_add(hmmDF, gbFile):
                     gene_id = "ref|{}|".format(gene.qualifiers['protein_id'][0])
                 except KeyError:
                     continue
-
                 if gene_id in proteins:
-                    geneRow = hmmDF.loc[hmmDF['query name'] == gene_id].squeeze()
-                    try:
-                        if (geneRow['plasmid ID'] == ""):
-                            pass
-                    except ValueError:
-                        print(geneRow)
-                        exit()
-                    if (geneRow['plasmid ID'] == ""):
-                        geneRow['plasmid ID'] = plasid
-                    else:
-                        newRow = geneRow.copy()
-                        newRow['plasmid ID'] = plasid
-                        hmmDF.append(newRow)
+                    geneRow = hmmDF[hmmDF['query name'] == gene_id]
+                    geneRow['plasmid ID'] = plasid
+                    outDF = outDF.append(geneRow)
+    return outDF
 
-    return hmmDF
+
+def extract_seqs(hmmDF, seqDict):
+    retDict ={}
+
+    targetList = list(hmmDF['target name'])
+
+    for header in seqDict.keys():
+        if header in targetList:
+            retDict[header] = seqDict[header]
+    return retDict
 
 
 if __name__ == "__main__":
@@ -119,23 +119,37 @@ if __name__ == "__main__":
     parser.add_argument("-f", "--fasta", default=None, type=str, help="Import Fasta for length information")
     parser.add_argument("-m", "--filter_eval", default=1, type=float, help="Set minimum e-value")
     parser.add_argument("-g", "--gbfile", type=str, default=None, help="GenBank file to match proteins to plasmids")
+    parser.add_argument("-p", "--protein", type=str, default=None, help="Export Matching seqs to PROTEIN file")
 
     args = parser.parse_args()
 
-    baseName = os.path.splitext(args.TableFile)[0]
-    tsvFile = make_tsv(args.TableFile, baseName)
+    if os.path.splitext(args.TableFile)[1] == ".txt":
+        baseName = os.path.splitext(args.TableFile)[0]
+        args.TableFile = make_tsv(args.TableFile, baseName)
 
-    hmm = import_tsv(tsvFile)
+    hmm = import_tsv(args.TableFile)
 
-    hmm = filter_eval(hmm, args.filter_eval)
+    if args.filter_eval < 1.0:
+        hmm = filter_eval(hmm, args.filter_eval)
 
     if args.fasta is not None:
-        lengths, descriptions = import_fasta(args.fasta)
+        lengths, descriptions, sequences = import_fasta(args.fasta)
         hmm = add_lengths(hmm, lengths)
         hmm = add_descriptions(hmm, descriptions)
 
     if args.min_eval is not None:
         outdf = min_eval(hmm)
+        print(outdf)
         if args.gbfile is not None:
-            hmm = gb_add(outdf, args.gbfile)
+            outdf = gb_add(outdf, args.gbfile)
         outdf.to_csv(args.min_eval, sep="\t")
+
+    if args.protein is not None:
+        try:
+            outSeqs = extract_seqs(hmm, sequences)
+        except ValueError:
+            print("Must give Fasta to get Fasta")
+            exit()
+        outfile = open(args.protein, 'w')
+        for header in sequences.keys():
+            outfile.write(">{}\n{}\n".format(header, sequences[header]))

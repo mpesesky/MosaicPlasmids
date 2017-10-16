@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
     plasmidDF = import_table(args.PlasmidTable)
     plasmidDF = plasmidDF[plasmidDF['length'] >= 500]
-    plasmidDF = plasmidDF[plasmidDF['CDS'] >= args.geneThreshold]
+    plasmidDF = plasmidDF[plasmidDF['CDS'] >= int(args.geneThreshold)]
     geneDF = import_table(args.GeneTable)
 
     if args.presence:
@@ -132,4 +132,4 @@ if __name__ == "__main__":
     plasmidDF.to_csv(args.outfile, sep="\t")
 
     if args.mannTest == True:
-        print(mann_whitneyu(plasmidDF, "gene counts"))
+        print("Mann-Whitney U p-value: {}".format(mann_whitneyu(plasmidDF, "gene counts")))

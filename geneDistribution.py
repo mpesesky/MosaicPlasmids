@@ -49,6 +49,7 @@ else:
     x.plot.hist(alpha=0.5, bins=binBoundaries, legend=True, ax=ax, stacked=False)
 
 ax.set_xlabel(args.label)
+ax.set_ylabel("Plasmid Count")
 plt.tight_layout()
 
 if args.logscale:

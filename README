@@ -31,7 +31,9 @@ Steps used to analyze mosaic plasmid properties (Figures 2, 3, and S1, and Table
 
 4) Tabulated Plasmid lengths with the custom script `python build_len_table.py`.
 
-5) The source organism for each plasmid was extracted from the plasmid catalog using Excel. NOTE: An example organism table (organisms.txt) used in this study is provided.
+5) Count coding regions per plasmid with the script `python gb_genes_per_locus.py ncbi_plasmid.gbff CDS_count_table.txt`
+
+6) The source organism for each plasmid was extracted from the plasmid catalog using Excel. NOTE: An example organism table (organisms.txt) used in this study is provided.
 
 ----Combine tables and analyze----
 1) Where the tables generated above did not already have headers, these were added by hand. In all cases the header for the column of plasmid accession numbers is 'locus'
