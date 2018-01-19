@@ -32,24 +32,21 @@ if args.binMax == 0:
 else:
     binBoundaries = np.arange(args.binMin, args.binMax, args.binSize)
 
-fig, ax = plt.subplots(nrows=1, ncols=1)
-
 if args.groupby is not None:
-    xcut, xbins = pd.cut(df[args.Column], bins=binBoundaries, retbins=True, right=False, precision=2)
-    binSeries = pd.Series(xbins[1:]).map(float).round(2)
-    xcut = pd.cut(df[args.Column], bins=binBoundaries, right=False, labels=binSeries)
-    allBins = binSeries.rename(args.Column).to_frame()
-    x = df.groupby([args.groupby, xcut]).size().unstack(args.groupby, fill_value=0)
-    y = pd.merge(x, allBins, right_on=args.Column, left_index=True, how='right').fillna(0)
-    del y[args.Column]
-    y.plot.bar(ax=ax, color=['c', 'm'])
-    ax.set_xticklabels(binSeries)
+    groupList = list(set(df[args.groupby].tolist()))
+    fig, ax = plt.subplots(nrows=1, ncols=len(groupList), sharey=True)
+    for x in range(len(groupList)):
+        ax[x].hist(df[args.Column][df[args.groupby] == groupList[x]], bins = binBoundaries, color='c')
+        ax[x].set_title(groupList[x])
+    fig.text(0.5, 0.01, args.label, ha='center')
+    fig.text(0.01, 0.5, "Plasmid Count", va='center', rotation='vertical')
 else:
+    fig, ax = plt.subplots(nrows=1, ncols=1)
     x = df[args.Column]
     x.plot.hist(alpha=0.5, bins=binBoundaries, legend=True, ax=ax, stacked=False)
+    ax.set_xlabel(args.label)
+    ax.set_ylabel("Plasmid Count")
 
-ax.set_xlabel(args.label)
-ax.set_ylabel("Plasmid Count")
 plt.tight_layout()
 
 if args.logscale:
