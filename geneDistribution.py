@@ -16,11 +16,13 @@ par.add_argument("-l", "--label", type=str, default=None, help="x-axis label")
 par.add_argument("-o", "--output", type=str, default=None, help="Output filename")
 par.add_argument("-L", "--logscale", action='store_true', help="Y-axis in log scale")
 par.add_argument("-c", "--numCutoff", metavar="L", type=int, default=0, help="Exclude plasmids < L genes")
+par.add_argument("-C", "--color", type=str, default='cyan', help="Matplotlib color code for plot")
+par.add_argument("-p", "--p_val", type=str, default="", help="P-value to print on chart for comparison")
 
 args = par.parse_args()
 
 df = pd.read_table(args.Table, sep="\t", index_col=0)
-df.replace(to_replace={args.groupby, 'static'}, value={args.groupby, 'non-mosaic'}, inplace=True)
+df.replace(to_replace={args.groupby: {'static': 'Non-mosaic', 'mosaic': 'Mosaic'}}, inplace=True)
 
 if args.numCutoff > 0:
     df = df[df['CDS'] >= args.numCutoff]
@@ -34,23 +36,33 @@ else:
 
 if args.groupby is not None:
     groupList = list(set(df[args.groupby].tolist()))
-    fig, ax = plt.subplots(nrows=1, ncols=len(groupList), sharey=True)
+    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(3, 6))
+    data = []
+    dataMax = df[args.Column].max()
     for x in range(len(groupList)):
-        ax[x].hist(df[args.Column][df[args.groupby] == groupList[x]], bins = binBoundaries, color='c')
-        ax[x].set_title(groupList[x])
-    fig.text(0.5, 0.01, args.label, ha='center')
-    fig.text(0.01, 0.5, "Plasmid Count", va='center', rotation='vertical')
+        data.append(df[args.Column][df[args.groupby] == groupList[x]])
+    plt.boxplot(data, labels=groupList, boxprops=dict(color=args.color),
+                flierprops=dict(marker='.', markerfacecolor='white', markeredgecolor='black'),
+                whiskerprops=dict(linestyle='-', color=args.color), medianprops=dict(color='black'))
+    y, h, col = dataMax + 0.025, 0.025, 'k'
+    plt.plot([1, 1, 2, 2], [y, y+h, y+h, y], lw=1.5, c=col)
+    pValTxt = "p-value {}".format(args.p_val)
+    plt.text(1.5, y+h, pValTxt, ha='center', va='bottom', color=col)
+    ax.set_ylabel(args.label)
+    plt.ylim(ymax=dataMax+0.1)
+
 else:
     fig, ax = plt.subplots(nrows=1, ncols=1)
     x = df[args.Column]
     x.plot.hist(alpha=0.5, bins=binBoundaries, legend=True, ax=ax, stacked=False)
     ax.set_xlabel(args.label)
     ax.set_ylabel("Plasmid Count")
+    if args.logscale:
+        plt.gca().set_yscale("log")
 
 plt.tight_layout()
 
-if args.logscale:
-    plt.gca().set_yscale("log")
+
 
 if args.output is not None:
     plt.savefig(args.output)
