@@ -5,6 +5,9 @@ df = pd.read_table("MasterTable.txt", sep="\t", index_col=0)
 
 binBoundaries = range(0, 2200000, 50000)
 
+mean = df['length'].mean()
+median = df['length'].median()
+print("Plasmid mean length:{}bp\nPlasmid median length:{}bp".format(mean, median))
 
 df.replace(to_replace={'character': 'static'}, value={'character': 'non-mosaic'}, inplace=True)
 fig, ax = plt.subplots(nrows=1, ncols=1)

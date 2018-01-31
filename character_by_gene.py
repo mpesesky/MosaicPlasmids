@@ -68,9 +68,10 @@ def gene_proportion(plasmidGeneDF, column):
 def mann_whitneyu(plasmidGeneDF, testCol):
     mosaic = plasmidGeneDF[plasmidGeneDF['character'] == 'mosaic'][testCol]
     static = plasmidGeneDF[plasmidGeneDF['character'] == 'static'][testCol]
-
+    mosaicMedian = mosaic.median()
+    staticMedian = static.median()
     stat, pval = spy.mannwhitneyu(mosaic, static, use_continuity=False)
-    return pval
+    return mosaicMedian, staticMedian, pval
 
 
 def calc_expected(plasType, df):
@@ -126,10 +127,12 @@ if __name__ == "__main__":
         plasmidDF = test_gene_presence(plasmidDF, geneDF)
     elif args.proportion:
         plasmidDF = test_gene_proportions(plasmidDF, geneDF)
+        print(plasmidDF[plasmidDF['Gene_proportion'] == 1.0].count())
     else:
         plasmidDF = test_gene_counts(plasmidDF, geneDF)
 
     plasmidDF.to_csv(args.outfile, sep="\t")
 
     if args.mannTest == True:
-        print("Mann-Whitney U p-value: {}".format(mann_whitneyu(plasmidDF, "gene counts")))
+        mosaic, static, pval = mann_whitneyu(plasmidDF, "Gene_proportion")
+        print("Mosaic median: {}\nNon-mosaic median: {}\nMann-Whitney U p-value: {}".format(mosaic, static, pval))
