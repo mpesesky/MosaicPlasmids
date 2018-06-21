@@ -15,7 +15,7 @@ if args.Infile.endswith("fna"):
     seqs = Fol.one_line_d(args.Infile)
     for header in seqs.keys():
         if ("NC_" in header) or ("NZ_" in header):
-            outfile.write(">{}\n{}\n".format(header, seqs[header]))
+            outfile.write("{}\n{}\n".format(header, seqs[header]))
     outfile.close()
 elif args.Infile.endswith("gbff"):
     outlist = []

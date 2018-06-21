@@ -58,7 +58,7 @@ for line in blastFile:
         subject = fields[1]
     except IndexError:
         print(line)
-        continue
+#        continue
 #    print(query)
 #    exit()
 
@@ -66,7 +66,7 @@ for line in blastFile:
         matches.append(query_to_locus(query))
         headers.remove(query)
 blastFile.close()
-
+print(len(matches))
 nonMatches = map(query_to_locus, headers)
 
 if args.matches is not None:

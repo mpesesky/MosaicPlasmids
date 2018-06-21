@@ -22,7 +22,7 @@ par.add_argument("-p", "--p_val", type=str, default="", help="P-value to print o
 args = par.parse_args()
 
 df = pd.read_table(args.Table, sep="\t", index_col=0)
-df.replace(to_replace={args.groupby: {'static': 'Non-mosaic', 'mosaic': 'Mosaic'}}, inplace=True)
+
 
 if args.numCutoff > 0:
     df = df[df['CDS'] >= args.numCutoff]

@@ -2,7 +2,7 @@ import argparse
 import Fasta_one_line as fol
 
 def query_to_locus(query):
-    return query.split("|")[1]
+    return query.split("|")[1].split(".")[0]
 
 def header_to_query(header):
     return header.split(" ")[0].lstrip(">")
@@ -55,6 +55,7 @@ if args.matches is not None:
     outNon.close()
 else:
     output = open(args.combo, 'w')
+    output.write("locus\tIS26\n")
     for item in matches:
         output.write("{}\t{}\n".format(item, "Present"))
     for item in nonMatches:
