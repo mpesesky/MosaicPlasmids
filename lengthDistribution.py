@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
 df = pd.read_table("MasterTable.txt", sep="\t", index_col=0)
@@ -9,19 +10,15 @@ mean = df['length'].mean()
 median = df['length'].median()
 print("Plasmid mean length:{}bp\nPlasmid median length:{}bp".format(mean, median))
 
-df.replace(to_replace={'character': 'static'}, value={'character': 'non-mosaic'}, inplace=True)
-fig, ax = plt.subplots(nrows=1, ncols=1)
-xcut, xbins = pd.cut(df['length'], bins=binBoundaries, retbins=True, right=False, precision=2)
-binSeries = pd.Series(xbins[1:]).map(float).round(2)
-xcut = pd.cut(df['length'], bins=binBoundaries, right=False, labels=binSeries)
-allBins = binSeries.rename('length').to_frame()
-x = df.groupby(['character', xcut]).size().unstack('character', fill_value=0)
-y = pd.merge(x, allBins, right_on='length', left_index=True, how='right').fillna(0)
-del y['length']
-y.plot.bar(ax=ax, color=['c', 'm'])
-ax.set_xticklabels(binSeries.map(lambda x: int(x/1000)))
-ax.set_ylabel("Number of Plasmids")
-ax.set_xlabel("Plasmid size (kbp)")
+df.replace(to_replace='st.tic', value='non-mosaic', regex=True, inplace=True)
+
+fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(3, 3))
+plt.boxplot([df[df['character'] == 'mosaic']['length'], df[df['character'] == 'non-mosaic']['length']],
+            labels=['mosaic', 'non-mosaic'], boxprops=dict(color='c'),
+            flierprops=dict(marker='.', markerfacecolor='white', markeredgecolor='black'),
+            whiskerprops=dict(linestyle='-', color='c'), medianprops=dict(color='black'))
+
+ax.set_ylabel("Plasmid length (bp)")
 plt.gca().set_yscale("log")
 plt.tight_layout()
-plt.savefig("LengthDistribution.png")
+plt.savefig("LengthBoxplot.png")
