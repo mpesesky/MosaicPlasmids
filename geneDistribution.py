@@ -28,6 +28,7 @@ if args.numCutoff > 0:
     df = df[df['CDS'] >= args.numCutoff]
 
 df = df[df['length'] >= 500]
+df.replace({'character':{'static':'non-mosaic'}}, inplace=True)
 
 if args.binMax == 0:
     binBoundaries = args.numbins
