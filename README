@@ -53,13 +53,14 @@ Steps used to analyze mosaic plasmid properties (Figures 2, 3, and S1, and Table
 4) Calculated proportion intergenus plasmids using the script `python organism_counts.py`, which requires the 'organisms.txt' and 'links.txt' files from the circos directory.
 
 ----Transposase and Resistance gene information----
-1) Ran a HMMER search of the appropriate database (Resfams or custom transposase database) usign the command `hmmscan -o $1.txt --tblout $1_table.txt --max --cpu 16 $1.hmm ncbi_plasmid.faa`, where $1 is the base name of the database. For Resfams the flag `--cut_ga` was also used.
+For these analyses only sequences from finished genomes were used (accession numbers starting with "NC"). Trimmed versions of the 'ncbi_plasmid.gbff' and 'ncbi_plasmid.fna' files were created to make this work.
+1) Ran a HMMER search of the appropriate database (Resfams or GenProp1044 database) usign the command `hmmscan -o $1.txt --tblout $1_table.txt --max --cpu 16 $1.hmm ncbi_plasmid.faa`, where $1 is the base name of the database. For Resfams the flag `--cut_ga` was also used. For the GenProp1044 database the flag `--cut_tc` was used.
 
-2) Filtered out low scoring hits using the command `python hmm_table_tools.py -m 0.0001 -f ncbi_plasmid.faa -g ncbi_plasmid.gbff -e $1_filtered_table.txt $1_table.txt` where $1 is the base name of the database, and the minimum evalue of 0.0001 was determined empirically.
+2) Reformatted the results files into parsable form  using the command `python hmm_table_tools.py -f ncbi_plasmid.faa -g ncbi_plasmid.gbff -e $1_filtered_table.txt $1_table.txt` where $1 is the base name of the database.
 
 3) Calculated the gene class proportions per plasmid using the command `python character_by_gene.py -c -P -m -t 10 -o $1_proportion_table.tsv MasterTable.txt $1_filtered_table.txt`, where $1 is the same as above.
 
-4) Created the gene proportion distribution figure (Figure 3) with the command `python geneDistribution.py -b 20 -g character -l "desired x-axis label" -o proportion_histogram.png -L -c 10 $1_proportion_table.tsv Gene_proportion` where $1 is the same as above.
+4) Created the gene proportion distribution figure (Figure 3) with the command `python geneDistribution.py -b 20 -p "p-value output by previous step" -g character -l "desired x-axis label" -o proportion_histogram.png -L -c 10 $1_proportion_table.tsv Gene_proportion` where $1 is the same as above.
 
 ----Length distribution----
 1) Make Length distribution histogram (Figure S1) using command `python lengthDistribution.py`
