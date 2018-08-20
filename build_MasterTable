@@ -1,1 +1,1 @@
-python /work/mpesesky/bin/combine_tables.py -t plasmid_environments.txt plasmid_character.txt IS26_table.txt Plasmid_lengths.txt CDS_count_table.txt -c 'locus' -o MasterTable.txt organisms.txt
+python /work/mpesesky/bin/combine_tables.py -t plasmid_environments.txt plasmid_character.txt IS26_table.txt Plasmid_lengths.txt CDS_count_table.txt locus_rep.txt -c 'locus' -o MasterTable.txt organisms.txt

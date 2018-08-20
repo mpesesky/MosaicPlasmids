@@ -17,4 +17,5 @@ if args.tables is not None:
     for tableFile in args.tables:
         df1 = pd.merge(df1, pd.read_csv(tableFile, delimiter="\t"), how="outer", on=args.column)
 
+df1.fillna('na', inplace=True)
 df1.to_csv(args.output, sep="\t")
