@@ -52,6 +52,10 @@ def seqid_to_locus(seqid):
     return seqid.split("|")[1]
 
 
+def seqid_to_short_locus(seqid):
+    return seqid.split("|")[1].split(".")[0]
+
+
 def match_repeats(row, repeatDF, dist, start):
     try:
         plasmid = repeatDF[row['qlocus']]
@@ -75,6 +79,39 @@ def match_repeats(row, repeatDF, dist, start):
     return 'NA'
 
 
+def add_pos(row, gbDict, start):
+    if row['plasmid ID'].startswith("NT") or row['plasmid ID'].startswith("NG"):
+        return 'NA'
+    try:
+        record = gbDict["{}.1".format(row['plasmid ID'])]
+    except KeyError:
+        try:
+            record = gbDict["{}.2".format(row['plasmid ID'])]
+        except KeyError:
+            try:
+                record = gbDict["{}.3".format(row['plasmid ID'])]
+            except KeyError:
+                try:
+                    record = gbDict["{}.4".format(row['plasmid ID'])]
+                except KeyError:
+                    print(row['plasmid ID'])
+                    exit()
+    for feat in record.features:
+        if feat.type != 'CDS':
+            continue
+        if ('pseudo' in feat.qualifiers) or ('pseudogene' in feat.qualifiers):
+            continue
+        try:
+            featid = feat.qualifiers['protein_id'][0]
+        except KeyError:
+            print(feat.qualifiers)
+            exit()
+        if featid == row['qlocus']:
+            if start:
+                return feat.location.start
+            else:
+                return feat.location.end
+    return 'NA'
 
 
 parser = argparse.ArgumentParser(description="Find inverted repeats near mosaic edges")
@@ -88,21 +125,27 @@ parser.add_argument("-g", "--genbank", default=None, help="Genbank file of plasm
 
 args = parser.parse_args()
 
-repeats = import_repeats(args.Inverted)
+#repeats = import_repeats(args.Inverted)
 #test = list(repeats.keys())[0]
 #print(repeats[test])
 
-fragments = pd.read_table(args.Filtered, sep="\t")
+#fragments = pd.read_table(args.Filtered, sep="\t")
 
-fragments['qlocus'] = fragments['qseqid'].map(seqid_to_locus)
+#fragments['qlocus'] = fragments['qseqid'].map(seqid_to_locus)
 
-fragments['Start_repeat'] = fragments.apply(lambda x: match_repeats(x, repeats, args.dist, True), axis=1)
+#fragments['Start_repeat'] = fragments.apply(lambda x: match_repeats(x, repeats, args.dist, True), axis=1)
 
-fragments['End_repeat'] = fragments.apply(lambda x: match_repeats(x, repeats, args.dist, False), axis=1)
+#fragments['End_repeat'] = fragments.apply(lambda x: match_repeats(x, repeats, args.dist, False), axis=1)
 
 if (args.transposases is not None) and (args.genbank is not None):
     trans = pd.read_table(args.transposases, index_col=0, sep="\t")
-    gb = SeqIO.parse(args.genbank, 'genbank')
+    gb = SeqIO.to_dict(SeqIO.parse(args.genbank, 'genbank'))
+    trans['qlocus'] = trans['query name'].map(seqid_to_locus)
+    trans['qstart'] = trans.apply(lambda x: add_pos(x, gb, True), axis=1)
+    trans['qend'] = trans.apply(lambda x: add_pos(x, gb, False), axis=1)
+
+
+
 
 
 fragments[['qlocus', 'length', 'qstart', 'qend', 'Start_repeat', 'End_repeat']].to_csv(args.Outfile, sep="\t")
