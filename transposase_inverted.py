@@ -114,6 +114,21 @@ def add_pos(row, gbDict, start):
     return 'NA'
 
 
+def between(x, first, last):
+    return (x >= first) and (x <= last)
+
+
+def find_transposases(row, transDF):
+    releDF = transDF[transDF['plasmid ID'] == row['qlocus'].split(".")[0]]
+    starts = releDF['qstart'].tolist()
+    ends = releDF['qend'].tolist()
+    count = 0
+    for i in range(len(starts)):
+        if between(starts[i], row['qstart'], row['qend']) or between(ends[i], row['qstart'], row['qend']):
+            count += 1
+    return count
+
+
 parser = argparse.ArgumentParser(description="Find inverted repeats near mosaic edges")
 
 parser.add_argument("Filtered", help="BLAST 6 output delineating mosaic fragments")
@@ -125,17 +140,17 @@ parser.add_argument("-g", "--genbank", default=None, help="Genbank file of plasm
 
 args = parser.parse_args()
 
-#repeats = import_repeats(args.Inverted)
+repeats = import_repeats(args.Inverted)
 #test = list(repeats.keys())[0]
 #print(repeats[test])
 
-#fragments = pd.read_table(args.Filtered, sep="\t")
+fragments = pd.read_table(args.Filtered, sep="\t")
 
-#fragments['qlocus'] = fragments['qseqid'].map(seqid_to_locus)
+fragments['qlocus'] = fragments['qseqid'].map(seqid_to_locus)
 
-#fragments['Start_repeat'] = fragments.apply(lambda x: match_repeats(x, repeats, args.dist, True), axis=1)
+fragments['Start_repeat'] = fragments.apply(lambda x: match_repeats(x, repeats, args.dist, True), axis=1)
 
-#fragments['End_repeat'] = fragments.apply(lambda x: match_repeats(x, repeats, args.dist, False), axis=1)
+fragments['End_repeat'] = fragments.apply(lambda x: match_repeats(x, repeats, args.dist, False), axis=1)
 
 if (args.transposases is not None) and (args.genbank is not None):
     trans = pd.read_table(args.transposases, index_col=0, sep="\t")
@@ -144,8 +159,8 @@ if (args.transposases is not None) and (args.genbank is not None):
     trans['qstart'] = trans.apply(lambda x: add_pos(x, gb, True), axis=1)
     trans['qend'] = trans.apply(lambda x: add_pos(x, gb, False), axis=1)
 
+    fragments['Transposases'] = fragments.apply(lambda x: find_transposases(x, trans))
 
-
-
-
-fragments[['qlocus', 'length', 'qstart', 'qend', 'Start_repeat', 'End_repeat']].to_csv(args.Outfile, sep="\t")
+    fragments[['qlocus', 'length', 'qstart', 'qend', 'Start_repeat', 'End_repeat', 'Transposases']].to_csv(args.Outfile, sep="\t")
+else:
+    fragments[['qlocus', 'length', 'qstart', 'qend', 'Start_repeat', 'End_repeat']].to_csv(args.Outfile, sep="\t")
