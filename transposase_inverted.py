@@ -75,7 +75,7 @@ def match_repeats(row, repeatDF, dist, start):
         repStart = repList1[i]
         repEnd = repList2[i]
         if ((pos >= repStart) and (pos <= repEnd)) or (abs(pos - repStart) <= dist) or (abs(pos - repEnd) <= dist):
-            return repStart
+            return i
     return 'NA'
 
 
@@ -119,7 +119,8 @@ def between(x, first, last):
 
 
 def find_transposases(row, transDF):
-    releDF = transDF[transDF['plasmid ID'] == row['qlocus'].split(".")[0]]
+    plasmidName = row['qlocus'].split(".")[0]
+    releDF = transDF[transDF['plasmid ID'] == plasmidName]
     starts = releDF['qstart'].tolist()
     ends = releDF['qend'].tolist()
     count = 0
@@ -159,7 +160,7 @@ if (args.transposases is not None) and (args.genbank is not None):
     trans['qstart'] = trans.apply(lambda x: add_pos(x, gb, True), axis=1)
     trans['qend'] = trans.apply(lambda x: add_pos(x, gb, False), axis=1)
 
-    fragments['Transposases'] = fragments.apply(lambda x: find_transposases(x, trans))
+    fragments['Transposases'] = fragments.apply(lambda x: find_transposases(x, trans), axis=1)
 
     fragments[['qlocus', 'length', 'qstart', 'qend', 'Start_repeat', 'End_repeat', 'Transposases']].to_csv(args.Outfile, sep="\t")
 else:
