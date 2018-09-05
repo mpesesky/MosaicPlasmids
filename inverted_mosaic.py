@@ -22,7 +22,6 @@ noRepeats = df[(df['Start_repeat'].isnull()) & (df['End_repeat'].isnull())]
 bracketed = hasRepeats[hasRepeats['Start_repeat'] == hasRepeats['End_repeat']]
 
 print("Overall percent of mosaic fragments with at least one transposase: {}".format((trans_count(df)/denom)*100))
-print("Percent of mosaic fragments with only one inverted repeat: {}".format((len(oneRepeat.index)/denom)*100))
 
 print("Percent of mosaic fragments with matching inverse repeats: {}".format((len(bracketed.index)/denom)*100))
 print("And at least one transposase: {}".format((trans_count(bracketed)/denom)*100))
@@ -30,6 +29,9 @@ print("And at least one transposase: {}".format((trans_count(bracketed)/denom)*1
 print("Percent of mosaic fragments with unmatched inverse repeats: "
       "{}".format(((len(hasRepeats.index) - len(bracketed.index))/denom)*100))
 print("And at least one transposase: {}".format(((trans_count(hasRepeats) - trans_count(bracketed))/denom)*100))
+
+print("Percent of mosaic fragments with only one inverted repeat: {}".format((len(oneRepeat.index)/denom)*100))
+print("And at least one transposase: {}".format(((trans_count(oneRepeat) - trans_count(bracketed))/denom)*100))
 
 print("Percent of mosaic fragments with no inverse repeats: {}".format((len(noRepeats)/denom)*100))
 print("And at least one transposase: {}".format((trans_count(noRepeats)/denom)*100))
