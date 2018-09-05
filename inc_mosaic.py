@@ -10,12 +10,11 @@ def inter_inc(row, master):
         subject = master[master['locus'] == row['locus2']]['Best_rep_name'].tolist()[0]
     except IndexError:
         return 'color=blue'
+    if pd.isnull(query) and pd.isnull(subject):
+        return 'color=blue'
 
     if query == subject:
-        if pd.isnull(query):
-            return 'color=blue'
-        else:
-            return 'color=black'
+        return 'color=black'
     else:
         return 'color=red'
 

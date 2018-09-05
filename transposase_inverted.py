@@ -148,6 +148,7 @@ repeats = import_repeats(args.Inverted)
 fragments = pd.read_table(args.Filtered, sep="\t")
 
 fragments['qlocus'] = fragments['qseqid'].map(seqid_to_locus)
+fragments['slocus'] = fragments['sseqid'].map(seqid_to_locus)
 
 fragments['Start_repeat'] = fragments.apply(lambda x: match_repeats(x, repeats, args.dist, True), axis=1)
 
@@ -162,6 +163,8 @@ if (args.transposases is not None) and (args.genbank is not None):
 
     fragments['Transposases'] = fragments.apply(lambda x: find_transposases(x, trans), axis=1)
 
-    fragments[['qlocus', 'length', 'qstart', 'qend', 'Start_repeat', 'End_repeat', 'Transposases']].to_csv(args.Outfile, sep="\t")
+    fragments[['qlocus', 'length', 'qstart', 'qend', 'slocus', 'sstart', 'send', 'Start_repeat', 'End_repeat',
+               'Transposases']].to_csv(args.Outfile, sep="\t")
 else:
-    fragments[['qlocus', 'length', 'qstart', 'qend', 'Start_repeat', 'End_repeat']].to_csv(args.Outfile, sep="\t")
+    fragments[['qlocus', 'length', 'qstart', 'qend', 'slocus', 'sstart', 'send', 'Start_repeat',
+               'End_repeat']].to_csv(args.Outfile, sep="\t")
