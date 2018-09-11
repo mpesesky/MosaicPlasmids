@@ -37,12 +37,25 @@ Steps used to analyze mosaic plasmid properties (Figures 2, 3, and S1, and Table
 
 6) The source organism for each plasmid was extracted from the plasmid catalog using Excel. NOTE: An example organism table (organisms.txt) used in this study is provided.
 
+----Incompatability group determination----
+1) Downloaded the latest version of PlasmidFinder (both Gram-negative and Gram-positive) from "https://cge.cbs.dtu.dk/services/data.php"
+
+2) Combined both datasets into one with `cat`
+
+3) Blasted PlasmidFinder rep genes against the plasmid BLAST database with the command `blastn -query plasmidfinder.fna -db ncbi_pla
+smid -outfmt 6 -out plasmid_reps.txt -perc_identity 95`
+
+4) Filtered out short matches with the command `python blast_filtering.py -s ncbi_plasmid.fna -q 60 plasmid_reps.txt > filtered_plas
+mid_reps.txt`
+
+5) Converted BLAST output to datatable with the command `python rep_column.py filtered_plasmid_reps.txt rep_column.txt`
+
 ----Combine tables and analyze----
 1) Where the tables generated above did not already have headers, these were added by hand. In all cases the header for the column of plasmid accession numbers is 'locus'
 
 2) Combined tabulated plasmid information with `bash build_MasterTable`
 
-3) Built table and figure of mosaic plasmids per genus with custom script `python mosaic_taxonomy.py -c 10 -o MosaicGenus10.tsv MasterTable.txt` (Figure 2).
+3) Built table and figure of mosaic plasmids per genus with custom script `python mosaic_taxonomy.py -c 10 -o MosaicGenus10.tsv MasterTable.txt` (Figure 3).
 
 	a) Improper source bacteria names, such as 'Onion', 'Plasmid', or 'uncultured' were removed manually.
 	b) The Borreliella genus was merged with Borrelia at this time, to reflect that it contains the same organisms and the Borreliella classification does not yet have standing.
@@ -60,7 +73,16 @@ For these analyses only sequences from finished genomes were used (accession num
 
 3) Calculated the gene class proportions per plasmid using the command `python character_by_gene.py -c -P -m -t 10 -o $1_proportion_table.tsv MasterTable.txt $1_filtered_table.txt`, where $1 is the same as above.
 
-4) Created the gene proportion distribution figure (Figure 3) with the command `python geneDistribution.py -b 20 -p "p-value output by previous step" -g character -l "desired x-axis label" -o proportion_histogram.png -L -c 10 $1_proportion_table.tsv Gene_proportion` where $1 is the same as above.
+4) Created the gene proportion distribution figure (Figure 4) with the command `python geneDistribution.py -b 20 -p "p-value output by previous step" -g character -l "desired x-axis label" -o proportion_histogram.png -L -c 10 $1_proportion_table.tsv Gene_proportion` where $1 is the same as above.
+
+5) Found inverted repeats in the plasmid database using the command `
+
+----Incompatability group analysis----
+1) Recategorized shared mosaic fragments by incompatibility group of connected plasmids with the command `python inc_mosaic.py MasterTable.txt links.txt links_rep.txt`
+
+2) Built Figures 2A and 2B with the command `python inc_stats.py MasterTable.txt links_rep.txt Figure2.png`
+
+3) Used the links_rep.txt file in the circos directory to make Figure 2C.
 
 ----Length distribution----
 1) Make Length distribution histogram (Figure S1) using command `python lengthDistribution.py`
