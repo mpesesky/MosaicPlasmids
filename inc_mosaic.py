@@ -38,7 +38,7 @@ parser = argparse.ArgumentParser(description="Enumerate connections between inc 
 parser.add_argument("Master", help="Master Plasmid Table")
 parser.add_argument("Links", help="Mosaic link network table")
 parser.add_argument("Output", help="Desired output file name")
-parser.add_argument("-p", "--processes", default=1, type=int, help="Number of parallel processes to run")
+#parser.add_argument("-p", "--processes", default=1, type=int, help="Number of parallel processes to run")
 
 args = parser.parse_args()
 
